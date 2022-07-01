@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: web-server
+      image: nginx
+      volumeMounts:
+        - name: ceph-pvc-1
+          mountPath: /var/lib/www/html
+  volumes:
+    - name: ceph-pvc-1
+      persistentVolumeClaim:
+        claimName: cephfs-pvc
+        readOnly: false
